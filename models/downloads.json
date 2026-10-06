@@ -1,0 +1,94 @@
+{
+  "verified_links_utc": "2026-10-06",
+  "checksum_note": "Checksums are the known-working Candidate 5 files, not an independent rights or authenticity grant.",
+  "models": [
+    {
+      "path": "models/inswapper_128.onnx",
+      "required": true,
+      "url": "https://huggingface.co/hacksider/deep-live-cam/resolve/581e70b61240b7928404c17900437f47cfe94133/inswapper_128.onnx",
+      "bytes": 554253681,
+      "sha256": "e4a3f08c753cb72d04e10aa0f7dbe3deebbf39567d4ead6dce08e98aa49e16af",
+      "terms": "InsightFace pretrained weights: non-commercial research only; see original author terms."
+    },
+    {
+      "path": "models/buffalo_l/det_10g.onnx",
+      "required": true,
+      "url": "https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip",
+      "bytes": 16923827,
+      "sha256": "5838f7fe053675b1c7a08b633df49e7af5495cee0493c7dcf6697200b85b5b91",
+      "terms": "InsightFace pretrained weights: non-commercial research only."
+    },
+    {
+      "path": "models/buffalo_l/w600k_r50.onnx",
+      "required": true,
+      "url": "https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip",
+      "bytes": 174383860,
+      "sha256": "4c06341c33c2ca1f86781dab0e829f88ad5b64be9fba56e56bc9ebdefc619e43",
+      "terms": "InsightFace pretrained weights: non-commercial research only."
+    },
+    {
+      "path": "models/buffalo_l/2d106det.onnx",
+      "required": false,
+      "url": "https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip",
+      "bytes": 5030888,
+      "sha256": "f001b856447c413801ef5c42091ed0cd516fcd21f2d6b79635b1e733a7109dbf",
+      "terms": "InsightFace pretrained weights: non-commercial research only."
+    },
+    {
+      "path": "models/buffalo_l/1k3d68.onnx",
+      "required": false,
+      "url": "https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip",
+      "bytes": 143607619,
+      "sha256": "df5c06b8a0c12e422b2ed8947b8869faa4105387f199c477af038aa01f9a45cc",
+      "terms": "InsightFace pretrained weights: non-commercial research only."
+    },
+    {
+      "path": "models/buffalo_l/genderage.onnx",
+      "required": false,
+      "url": "https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip",
+      "bytes": 1322532,
+      "sha256": "4fde69b1c810857b88c64a335084f1c3fe8f01246c9a191b48c7bb756d6652fb",
+      "terms": "InsightFace pretrained weights: non-commercial research only."
+    },
+    {
+      "path": "models/GPEN-BFR-256.onnx",
+      "required": false,
+      "url": "https://huggingface.co/hacksider/deep-live-cam/resolve/581e70b61240b7928404c17900437f47cfe94133/GPEN-BFR-256.onnx",
+      "bytes": 75715262,
+      "sha256": "aa5bd3ab238640a378c59e4a560f7a7150627944cf2129e6311ae4720e833271",
+      "terms": "GPEN author terms and ONNX exporter terms apply; do not infer commercial permission from mirror availability."
+    },
+    {
+      "path": "models/GPEN-BFR-512.onnx",
+      "required": false,
+      "url": "https://huggingface.co/hacksider/deep-live-cam/resolve/581e70b61240b7928404c17900437f47cfe94133/GPEN-BFR-512.onnx",
+      "bytes": 284244491,
+      "sha256": "bf80acb8e91ba8852e3f012505be2c3b6cd6b3eed5ec605e3db87863c4e74d4e",
+      "terms": "GPEN author terms and ONNX exporter terms apply."
+    },
+    {
+      "path": "models/GFPGANv1.4.onnx",
+      "required": false,
+      "url": "https://huggingface.co/hacksider/deep-live-cam/resolve/581e70b61240b7928404c17900437f47cfe94133/GFPGANv1.4.onnx",
+      "bytes": 340256686,
+      "sha256": "cd7311b8d9e13cdb1e208b12363182da58c7bf45e26d1aa67bbeac4751aae92e",
+      "terms": "GFPGAN Apache-2.0 with separately listed third-party terms; review source license and model conversion provenance."
+    },
+    {
+      "path": "models/matting/rvm_mobilenetv3_fp32.onnx",
+      "required": false,
+      "url": "https://github.com/PeterL1n/RobustVideoMatting/releases/download/v1.0.0/rvm_mobilenetv3_fp32.onnx",
+      "bytes": 14975696,
+      "sha256": "88d4531297118f595bf2fd60f6f566aec2e559393802d1f436c380f0cbbd2828",
+      "terms": "Author repository GPL-3.0."
+    },
+    {
+      "path": "models/matting/modnet.onnx",
+      "required": false,
+      "url": "https://drive.google.com/file/d/1cgycTQlYXpTh26gB9FTnthE7AvruV8hd/view",
+      "bytes": 25888640,
+      "sha256": "07c308cf0fc7e6e8b2065a12ed7fc07e1de8febb7dc7839d7b7f15dd66584df9",
+      "terms": "Author-endorsed community ONNX export; MODNet author repository Apache-2.0."
+    }
+  ]
+}

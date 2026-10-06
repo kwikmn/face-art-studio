@@ -1,0 +1,8 @@
+# CUDA 12.8 and cuDNN 9.10 match the original copied runtime's versions.
+onnxruntime-gpu==1.21.0
+nvidia-cublas-cu12==12.8.4.1
+nvidia-cuda-runtime-cu12==12.8.90
+nvidia-cudnn-cu12==9.10.2.21
+# ONNX Runtime's standard CUDA preloader also loads cuFFT.
+nvidia-cufft-cu12==11.3.3.83
+nvidia-nvjitlink-cu12==12.8.93

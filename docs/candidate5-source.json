@@ -1,0 +1,402 @@
+{
+  "candidate": "v0.2 candidate 5",
+  "base_commit": "6cf2d087560f47fec79acfbeb6b4ea11be69dc47",
+  "original_file_hashes": [
+    {
+      "path": "modules/app_instance.py",
+      "sha256": "1723131da0eb31db5a7b5cf3f426699de00197cfc87c272c6e66793e47f493c8"
+    },
+    {
+      "path": "modules/capturer.py",
+      "sha256": "904f42ed8c698c63368c1bef93ddaa9d73a8c9ab7f5690b226de045d3b40ae9d"
+    },
+    {
+      "path": "modules/cluster_analysis.py",
+      "sha256": "08b944172456a082393faab09dd0dc50859e3555d51407922022d7010f6728d2"
+    },
+    {
+      "path": "modules/core.py",
+      "sha256": "6683032b252d608a7b1ce745e666363eb919c69fc83d323cf9a2acad6c2bd3ae"
+    },
+    {
+      "path": "modules/custom_types.py",
+      "sha256": "968357164c6b7d7b9663e56731e27d579bb39caaa18f1d90ede8414a0c2f9290"
+    },
+    {
+      "path": "modules/face_analyser.py",
+      "sha256": "5c395fcc4dcb5c2762215e16c2c2a07765322fc28c8f515871e2c961d839df1b"
+    },
+    {
+      "path": "modules/face_blending.py",
+      "sha256": "5585e6bb22c200d71ebc6d954cc34fbb141cfda4c5a41de4907c8d1daf62a53a"
+    },
+    {
+      "path": "modules/gettext.py",
+      "sha256": "29ca0f3c8b7432b4a0db4b8e8961d579935b5021f145c498c57c8ed2debdc907"
+    },
+    {
+      "path": "modules/globals.py",
+      "sha256": "f5a4d3e99e0d3229e7ac19de99f1f6b13322480bad0fe412a6ea43f134b944b2"
+    },
+    {
+      "path": "modules/gpu_processing.py",
+      "sha256": "2e96572ec233bd0d5a0fa9bea25482b1ac073f13134e8c08376f2214942f101f"
+    },
+    {
+      "path": "modules/live_face.py",
+      "sha256": "7e98f91a98b966a419bbaf2d4266882b7b4cc897981076261ee304aa4408b3c0"
+    },
+    {
+      "path": "modules/live_pipeline.py",
+      "sha256": "173dfcb00c1932828af91f490c8451f89c7c76a9b9a240f7c06bb26f7087b443"
+    },
+    {
+      "path": "modules/metadata.py",
+      "sha256": "468cf25469166162452f9690b6dfeaa17200afeab13e461fd07fcc8051ee3062"
+    },
+    {
+      "path": "modules/model_downloader.py",
+      "sha256": "84ffe835b5382e2364d2be647a70bee289b4d621a6d1783187ef7cdbf9aeaf0e"
+    },
+    {
+      "path": "modules/onnx_optimize.py",
+      "sha256": "dd20d68749199dc3c49c887349a5cfc018e3b0792d4704e0e0d9bb4c49159d45"
+    },
+    {
+      "path": "modules/paths.py",
+      "sha256": "6814c94a681e184d1aca3001e8ab7667487df91699162197522c14065bd0d400"
+    },
+    {
+      "path": "modules/platform_info.py",
+      "sha256": "36a3587c53ff8aa2538cae746d402965764dea8e68eaa7f09b7400f04dea8976"
+    },
+    {
+      "path": "modules/predicter.py",
+      "sha256": "ef35a94136b769d1f30fa844ab43892a3774575d96ef36a692b7adec0899fa3b"
+    },
+    {
+      "path": "modules/run.py",
+      "sha256": "b5ad6fb34cf7c7ebcc8b114b0140d8f9a2a347db27d43947ee9f9aac99497056"
+    },
+    {
+      "path": "modules/telemetry.py",
+      "sha256": "a201d5e5bd2a27d157e9ec80576cc6aa802934ad4f6bb1ad23361f347491d3fe"
+    },
+    {
+      "path": "modules/tkinter_fix.py",
+      "sha256": "0ad65eab2f10f910c7964c8e84a3d8c74110ec6636002f5e52635730fa32af8c"
+    },
+    {
+      "path": "modules/typing.py",
+      "sha256": "4f9f6ba1e1fd178a0fa93c4eef3fe64e04c3fa9f2a7ff3c08016e9335e3f0038"
+    },
+    {
+      "path": "modules/ui.json",
+      "sha256": "f1e421ae5441972bbcaf8ed3f4b662bc4d83be777f2a4aa60635b42089788de4"
+    },
+    {
+      "path": "modules/ui.py",
+      "sha256": "61f7bb2c646631fa95b658c6dad0a65b63ce2b9a05b7452320d036f0233bc365"
+    },
+    {
+      "path": "modules/ui_tooltip.py",
+      "sha256": "ea4f6c0c2afb79bac26e9ec1d46844eb4003ed8e54f498f5d6e360400789ca3c"
+    },
+    {
+      "path": "modules/utilities.py",
+      "sha256": "bbc3f23a2fb6815d41854385f41256a5af90346c23dbb31806fdeb08936a6ce1"
+    },
+    {
+      "path": "modules/video_capture.py",
+      "sha256": "f455267e6a5c689eac262ae4e7d460d6dc03c104346bdc57f2c24460b713a7af"
+    },
+    {
+      "path": "modules/virtual_camera.py",
+      "sha256": "7190882c40de54e50ac3c0a68958d27278b98e0afd29a52bbe6e970825b2d6df"
+    },
+    {
+      "path": "modules/__init__.py",
+      "sha256": "80c1a7fa1605ae3296784bba51188dcec7f823cfae64f51ab70a53045935ac4b"
+    },
+    {
+      "path": "modules/processors/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "modules/processors/frame/core.py",
+      "sha256": "362b27728fc881e16fabf115e4bc925f92925bae99f6c81e504b1c94f1b06998"
+    },
+    {
+      "path": "modules/processors/frame/face_enhancer.py",
+      "sha256": "de9881df2d732874bc00f5c9b3d1b568fe500918d8e3507c0b824679bd15fd91"
+    },
+    {
+      "path": "modules/processors/frame/face_enhancer_gpen256.py",
+      "sha256": "5ea4218710a88f0df9fb5731f4e7a39c2cabc08d1202e574c3df42fb8b7416c0"
+    },
+    {
+      "path": "modules/processors/frame/face_enhancer_gpen512.py",
+      "sha256": "08386d865db6e71ecc3b57bf26d7494bedbabc0286005e32d2611b87690b0c05"
+    },
+    {
+      "path": "modules/processors/frame/face_masking.py",
+      "sha256": "c378fb220811cdbe2fc76913a5968c6f3f75c5ea771b155ec127ac38ed7d3749"
+    },
+    {
+      "path": "modules/processors/frame/face_swapper.py",
+      "sha256": "71901fa793eafaae1748fc4bbde54900728fe7b7f7aaaf9a084f18c6e28bbd8c"
+    },
+    {
+      "path": "modules/processors/frame/_onnx_enhancer.py",
+      "sha256": "1359646922986c9fb3e150d8c4fb2d66b470cdc4136033ad520f12b7e5edcfaa"
+    },
+    {
+      "path": "modules/processors/frame/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "modules/studio/app.py",
+      "sha256": "89591745e39e729a9297392d0378fadf65ff7635bc4b679e541b44eb63fdabd2"
+    },
+    {
+      "path": "modules/studio/audio_delay.py",
+      "sha256": "98bb34c8e14f7c094a6046e390a1f6a467cf8125d8aa61d4981e7c2a878782e1"
+    },
+    {
+      "path": "modules/studio/background.py",
+      "sha256": "f1c2d15440cfc37491a382536893425ae5b19d56445a0a95b42cddb464e7cb3b"
+    },
+    {
+      "path": "modules/studio/facegen.py",
+      "sha256": "db7449ef754a10e9eb6fc81f7a384ef2eda699dc1d17072510ece45000fa124c"
+    },
+    {
+      "path": "modules/studio/facegen_worker.py",
+      "sha256": "a9c7ea1ea2c63b3ae7aa6491c33c188cbff3278bccf26d246979264a8f144e59"
+    },
+    {
+      "path": "modules/studio/face_lab.py",
+      "sha256": "56d053110f6fc52d7f0db08f7433d87250f70292fa528e0a7f3b0703c5b25fe4"
+    },
+    {
+      "path": "modules/studio/live_audio_worker.py",
+      "sha256": "7153800a4338902a9d55675638c5d4e8edf27b4254d86c4c7a01f432026a1969"
+    },
+    {
+      "path": "modules/studio/live_enhancement.py",
+      "sha256": "d3380b0cf1e97c5cefd7434b88f417f414312e5ab18f5a7f5b815003216387bb"
+    },
+    {
+      "path": "modules/studio/matting.py",
+      "sha256": "697742e34dfb5328582881234641db9392833d8649d6c4edacfe32a7841dcde8"
+    },
+    {
+      "path": "modules/studio/postwork.py",
+      "sha256": "623ae05bb919d2419e3f1dcdedcc21fee6671d51a97616ecbaa14c19a4df79c2"
+    },
+    {
+      "path": "modules/studio/process_utils.py",
+      "sha256": "c4c680449d5bf7ef2afe4f2166f594e7fa2f82d7981a31a600e46f0d600046a3"
+    },
+    {
+      "path": "modules/studio/recording.py",
+      "sha256": "d51789f8ffe0c6061ecfb376f3c2bf9a656386c5f8bcc53ed8fb69cf889761ef"
+    },
+    {
+      "path": "modules/studio/reference_camera.py",
+      "sha256": "086fd8cc3671866c60af91e34b5b2808240c0400123909db3a70f0325c654dca"
+    },
+    {
+      "path": "modules/studio/reference_camera_worker.py",
+      "sha256": "218f189eb7e13f7226871f18c5c36130808be060942b6e8f0b99b013b17bc4ab"
+    },
+    {
+      "path": "modules/studio/slideshow.py",
+      "sha256": "862486a516115e0d8da0773b83e037321c462c9bff3f8707a270569d9e79eac4"
+    },
+    {
+      "path": "modules/studio/slideshow_ui.py",
+      "sha256": "dcb4ab0569c9c1c9bd956a3db71c9094c6e5082afea13351e28d3aa847635215"
+    },
+    {
+      "path": "modules/studio/snapshot_blend.py",
+      "sha256": "9890818f6f0e48e3a260de8bab527e9d336b49a3260abee5c6ce9944cb3927c7"
+    },
+    {
+      "path": "modules/studio/snapshot_blend_dialog.py",
+      "sha256": "d182d3f240f72e97fba0b1226449b2f54bf55c02010a93724045e907260f2549"
+    },
+    {
+      "path": "modules/studio/taskbar.py",
+      "sha256": "1a691efcf772e61fa63afaca649c8d946e3597768819cb93f003b2e9a337ad07"
+    },
+    {
+      "path": "modules/studio/window_controls.py",
+      "sha256": "23cac9d411ba7736cc93ec4e87639d38b5cdc822ec2c4ade007249ae37191729"
+    },
+    {
+      "path": "modules/studio/__init__.py",
+      "sha256": "a164465c48d5d33611c28875126db965cbe2e251bfb393578071b17c92465256"
+    },
+    {
+      "path": "modules/studio/assets/faceart.ico",
+      "sha256": "ca99602a8ae8044525e1de91c758de6690610c982871c9a4df46d0d1a1c715c9"
+    },
+    {
+      "path": "modules/studio/assets/background/Apache-2.0.txt",
+      "sha256": "9bf4e882bdd75e8d10fc788c53d0a787ef0f59cead1fe1f0878c240896fc8610"
+    },
+    {
+      "path": "modules/studio/assets/background/mediapipe.onnx.license",
+      "sha256": "d1c2d7d8e760a1c513e96129fc72e0c30b43a0ffd7d2e3f45542a8e55a29c335"
+    },
+    {
+      "path": "modules/studio/assets/background/README.md",
+      "sha256": "c58877791f0759a31d3bef86f8861baf4b5b5d7c8ce14c2f20f2b2ae511a3a79"
+    },
+    {
+      "path": "tests/test_audio_delay.py",
+      "sha256": "cf582ae7b5925f7611bea9d60b22a6adc0c4aa49142c6e00c2080d5b89ab2536"
+    },
+    {
+      "path": "tests/test_background.py",
+      "sha256": "2266bf3a901f4bd586c5b3fc147b80a7feb3c6896a2182e81761a046f90c06cb"
+    },
+    {
+      "path": "tests/test_core_map_faces_fallback.py",
+      "sha256": "f7e83c83943dd0ba87b2e99316cd52e10c52bcd8c8ec1ca44503b528ba3e6c24"
+    },
+    {
+      "path": "tests/test_facegen.py",
+      "sha256": "9837f06afdfbdd103a4db5f3caa0ea72db114b4e027506942393f164be6eb164"
+    },
+    {
+      "path": "tests/test_face_analyser_get_one_face.py",
+      "sha256": "eb72e496d60a7e6780566edfda9c1c4d12e9045809e2bf37b7ad1082559f3f51"
+    },
+    {
+      "path": "tests/test_face_blending.py",
+      "sha256": "df3539d2379db4d421d9da53089c3bddaf215227b9a0cff2e7259e99a6e5664f"
+    },
+    {
+      "path": "tests/test_live_enhancement.py",
+      "sha256": "d595b2ad288beb753cdc97575224c291481c20695008f8d947179223a16e007b"
+    },
+    {
+      "path": "tests/test_live_pipeline.py",
+      "sha256": "022296c71af3c70e1c7832f32145fce38cb4cf6a896de2279a29f8461d24852e"
+    },
+    {
+      "path": "tests/test_publisher_delays.py",
+      "sha256": "b47b719a712ac29251847e9f17641a08c19646a28120d3a2845453706f570833"
+    },
+    {
+      "path": "tests/test_slideshow.py",
+      "sha256": "bcaff475e3f73a609faba340a5cbc464e7539e6f894e5980e8f8cb99e029a854"
+    },
+    {
+      "path": "tests/test_snapshot_blend.py",
+      "sha256": "8a10cf2e48a079abf7c30a2fb14ba473fcf2c9a323ec8f5730dba4bc26c146b9"
+    },
+    {
+      "path": "tests/test_studio_media.py",
+      "sha256": "beee833d5d24277340c2046ef88b355bafb69aa5cf1d8fbace273ffb41fea19e"
+    },
+    {
+      "path": "tests/test_virtual_camera.py",
+      "sha256": "b954bb498dbf1f6b292d80b50d36e6fb39682e3ba688b08bb4597287e9735c28"
+    },
+    {
+      "path": "locales/de.json",
+      "sha256": "be3a98fe4a3d8571de8f5b7ee975d565d02971099f4b84fb46f10873f10bb00c"
+    },
+    {
+      "path": "locales/es.json",
+      "sha256": "2c68f253b941ea1ace331ac9d1a7f7391ba9266ee7fa24bfc2893d3cbfab02b8"
+    },
+    {
+      "path": "locales/fi.json",
+      "sha256": "89141ec4b7955feab7049245b20a4e3c0f0fff9bf2d22fefdc713242aa79e5a9"
+    },
+    {
+      "path": "locales/id.json",
+      "sha256": "b174aa1b1e028b51e41f17ab3710345090fd70128f5735b5bab75c7711800aed"
+    },
+    {
+      "path": "locales/km.json",
+      "sha256": "4d4f67491a6fb6f85cb21fbee4751e1fcfe01be5e29e5da37efaf6762b4e09ce"
+    },
+    {
+      "path": "locales/ko.json",
+      "sha256": "0f4a4b07f7d4a622e76f6c0c979f2830734618495500b078bf3a07a04ce506e9"
+    },
+    {
+      "path": "locales/pt-br.json",
+      "sha256": "96f4692c5e55c8f9789befda8283ece19e436953fbfb9fc7c5f514f68c7f70ec"
+    },
+    {
+      "path": "locales/ru.json",
+      "sha256": "b37952d85ff758eeb34b97e615d79d060e88bf93fab16c3f37f030ca06ec2f5f"
+    },
+    {
+      "path": "locales/th.json",
+      "sha256": "57ce343477b1fb9d83f11dc128cf5e4a1ab0beddd44b87c60b3c4eec01334e68"
+    },
+    {
+      "path": "locales/zh.json",
+      "sha256": "1300818a41dbdb1bca559ea77998e73c57f5d8222f96192a4e180933eb0870f3"
+    },
+    {
+      "path": "modules/studio/assets/background/mediapipe.onnx",
+      "sha256": "7f785cf032261a07af7b845f891cab30da3f0757c7b362310e089e3aa8e8860a"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "6f1e622c82a380075843bb084a7ec3b1f1d12a4a02526d75e78b0924a860aa75"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "36f044da5019f3b5dd7e86130e7f987819fc266ffaa88c4534e8ad57cf479429"
+    },
+    {
+      "path": "isolated_runtime.py",
+      "sha256": "9678eeae2db561b83ccd2756dcdea0821f2c95634194849fb2fd94dbf21d5611"
+    },
+    {
+      "path": "run_studio.py",
+      "sha256": "2243e22d739bf1e5e2e9daaa5dc2a635d5bafde2dce45a953e0d0d7b476a1afd"
+    },
+    {
+      "path": "run.py",
+      "sha256": "1da9a9aed5ef533f6343db405b5181cfca0bcd9d6a6351f341b6854c01b4ef10"
+    },
+    {
+      "path": "run_protected_camera.py",
+      "sha256": "949036273b0272ce563853720cd49d6879c88005a7fc3558ebc1aff94ca93231"
+    },
+    {
+      "path": "run_matting_lab.py",
+      "sha256": "55037a98250089acef6797c88aedffdd5ba7315e78c1b9410acb3c3619fcc47e"
+    },
+    {
+      "path": "tkinter_fix.py",
+      "sha256": "25066938d1a620e63a1ee5b0c2949d6531806d21e2240a0ddf9c5fd104cc9895"
+    },
+    {
+      "path": "benchmark_pipeline.py",
+      "sha256": "832c904a8426367686d6372dbd734f58b442f85e3be24695d51a023e32d29538"
+    },
+    {
+      "path": "requirements-facegen.txt",
+      "sha256": "589e40a773e423f5245983be1d3adacaacd2d9287ff1f514fa27f11256350567"
+    },
+    {
+      "path": "validate_virtual_ui.py",
+      "sha256": "165880e81be793a0587260a56800dcb27927bbdf3ad8cb4ae2a583aff5d9fe98"
+    },
+    {
+      "path": "models/matting/manifest.json",
+      "sha256": "c369934070f020136d5c1187332267a56f3aa981a7b0a439a03900f5b8a1de27"
+    }
+  ]
+}

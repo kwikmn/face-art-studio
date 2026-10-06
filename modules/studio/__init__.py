@@ -1,0 +1,1 @@
+"""FaceArt Studio desktop application."""

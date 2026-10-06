@@ -1,0 +1,24 @@
+# FaceArt Studio v0.2 Windows/Python 3.10 runtime.
+# Versions derived from the Candidate 5 environment; optional generation is separate.
+numpy==1.26.4
+onnx==1.18.0
+insightface==0.7.3
+opencv-python-headless==4.10.0.84
+cv2-enumerate-cameras==1.1.15
+PySide6==6.11.2
+Pillow==11.1.0
+psutil==5.9.8
+requests==2.32.5
+protobuf==4.25.1
+tqdm==4.67.1
+pygrabber==0.2
+pyvirtualcam==0.14.0
+scipy==1.15.3
+scikit-learn==1.7.2
+scikit-image==0.25.2
+matplotlib==3.10.7
+albumentations==2.0.8
+albucore==0.0.24
+easydict==1.13
+prettytable==3.17.0
+Cython==3.2.2
