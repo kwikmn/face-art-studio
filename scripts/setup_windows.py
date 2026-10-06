@@ -9,27 +9,67 @@ import shutil
 import struct
 import subprocess
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 VENV = ROOT / 'venv'
 PYTHON = VENV / 'Scripts' / 'python.exe'
 HIDDEN = getattr(subprocess, 'CREATE_NO_WINDOW', 0)
+# Leave room below Windows' traditional 260-character compiler path limit
+# for pip's unpack directory plus InsightFace's nested object-file paths.
+MAX_BUILD_TEMP_PATH = 64
 
 
 def supported_python():
     return sys.version_info[:2] == (3, 10) and sys.version_info[:3] >= (3, 10, 6) and struct.calcsize('P') == 8
 
 
+def supported_windows(version=None):
+    if sys.platform != 'win32':
+        return False
+    version = version or sys.getwindowsversion()
+    return version.major == 10 and (version.product_type == 1 or version.build == 20348)
+
+
+def supported_driver(gpu):
+    """Use the Windows minimum for the pinned CUDA 12.8/cuDNN 9.10.2 stack."""
+    try:
+        versions = [tuple(int(part) for part in line.rsplit(',', 1)[1].strip().split('.')) for line in gpu.splitlines()]
+    except (IndexError, ValueError):
+        return False
+    return bool(versions) and all(len(version) == 2 and version >= (570, 65) for version in versions)
+
+
+def build_temp_base():
+    base = Path(tempfile.gettempdir()).resolve()
+    if sys.platform == 'win32' and len(str(base)) + len('/fas-12345678') > MAX_BUILD_TEMP_PATH:
+        buffer = ctypes.create_unicode_buffer(32768)
+        size = ctypes.windll.kernel32.GetShortPathNameW(str(base), buffer, len(buffer))
+        if 0 < size < len(buffer):
+            base = Path(buffer.value)
+    if len(str(base)) + len('/fas-12345678') > MAX_BUILD_TEMP_PATH:
+        raise RuntimeError('The build temp path is too long for the InsightFace compiler. Set TMP and TEMP to an existing short writable folder (base path at most 51 characters), then rerun setup. Do not change Windows long-path settings.')
+    return base
+
+
 def command(arguments, log):
     # Argument lists handle spaces without shell interpolation.
     environment = os.environ.copy()
     environment.update(PYTHONNOUSERSITE='1', PYTHONDONTWRITEBYTECODE='1', PYTHONPATH='', NO_ALBUMENTATIONS_UPDATE='1')
-    environment['TMP'] = environment['TEMP'] = str(ROOT / 'state' / 'setup-temp')
-    Path(environment['TEMP']).mkdir(parents=True, exist_ok=True)
+    # --isolated alone still reads global/site pip configuration files.
+    environment['PIP_CONFIG_FILE'] = os.devnull
     # Honor a configured pip cache (for example a roomy secondary disk).
     environment.setdefault('PIP_CACHE_DIR', str(ROOT / 'state' / 'cache' / 'pip'))
+    # Build outside the possibly deep project path. Cleanup covers only this
+    # uniquely owned directory; logs and project cache/state stay in place.
+    with tempfile.TemporaryDirectory(prefix='fas-', dir=build_temp_base(), ignore_cleanup_errors=True) as build_temp:
+        environment['TMP'] = environment['TEMP'] = build_temp
+        execute(arguments, log, environment)
+
+
+def execute(arguments, log, environment):
     print('Running:', subprocess.list2cmdline([str(a) for a in arguments]), flush=True)
-    # pip --isolated ignores inherited indexes and credential-bearing pip configs.
+    # --isolated plus the null config excludes inherited indexes/config files.
     # Do not log the inherited environment or user configuration.
     with subprocess.Popen([str(a) for a in arguments], cwd=ROOT, env=environment,
                           stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
@@ -40,7 +80,7 @@ def command(arguments, log):
             log.flush()
         result = process.wait()
     if result:
-        raise RuntimeError(f'Command failed (exit {result}). See the setup log. If InsightFace compilation failed, install the C++ Build Tools listed in docs/INSTALL.md and rerun setup.')
+        raise RuntimeError(f'Command failed (exit {result}). See the setup log. For InsightFace compiler errors, check the quoted MSVC/SDK error and build-path guidance in docs/INSTALL.md. If Build Tools already passed preflight, reinstalling them is not the first remedy.')
 
 
 def nvidia_gpu():
@@ -68,6 +108,25 @@ def cpp_tools():
     return bool(result.stdout.strip()) and result.returncode == 0
 
 
+def existing_insightface():
+    """A compatible installed extension can be reused; no compiler is needed."""
+    if not PYTHON.is_file():
+        return False
+    probe = (
+        "import importlib.metadata as m; "
+        "d=m.distribution('insightface'); "
+        "ok=d.version=='0.7.3' and any(str(p).endswith('.pyd') and "
+        "'mesh_core_cython' in str(p) and d.locate_file(p).is_file() for p in d.files or []); "
+        "raise SystemExit(0 if ok else 1)"
+    )
+    try:
+        result = subprocess.run([str(PYTHON), '-s', '-c', probe], capture_output=True,
+                                text=True, timeout=15, creationflags=HIDDEN)
+        return result.returncode == 0
+    except (OSError, subprocess.TimeoutExpired):
+        return False
+
+
 def obs_registered():
     if sys.platform != 'win32':
         return False
@@ -82,17 +141,40 @@ def obs_registered():
 
 def preflight():
     problems = []
-    if sys.platform != 'win32' or not supported_python():
-        problems.append('Use Windows x64 and Python 3.10.6 or newer in the 3.10 series (64-bit). Install the Python launcher; see docs/INSTALL.md.')
+    if not supported_windows():
+        problems.append('The pinned CUDA/cuDNN runtime supports Windows 10, Windows 11 or Windows Server 2022 x64. See docs/INSTALL.md.')
+    if not supported_python():
+        problems.append('Use Python 3.10.6 or newer in the 3.10 series (64-bit). Install the Python launcher; see docs/INSTALL.md.')
+    try:
+        base = build_temp_base()
+        print('Short build temp base:', base)
+        if shutil.disk_usage(base).free < 3 * 1024**3:
+            problems.append('Free at least 3 GiB on the build-temp drive for unpacking/compilation, or set TMP and TEMP to an existing short writable folder on a roomier drive.')
+    except (OSError, RuntimeError) as error:
+        problems.append(str(error))
     free = shutil.disk_usage(ROOT).free / (1024**3)
     print(f'Free space on the release drive: {free:.1f} GiB')
-    if free < 8:
-        problems.append('Free at least 8 GiB for the base environment, downloads and models, or move the extracted source to a roomier drive. Optional Face Lab needs considerably more.')
+    if free < 12:
+        problems.append('Free at least 12 GiB on the release drive for installation and required models; 15 GiB or more is recommended for OS headroom. Move the extracted source to a roomier drive if needed. Optional Face Lab and recordings need considerably more.')
+    cache = Path(os.environ.get('PIP_CACHE_DIR', str(ROOT / 'state/cache/pip'))).expanduser().resolve()
+    cache_ancestor = cache
+    while not cache_ancestor.exists() and cache_ancestor.parent != cache_ancestor:
+        cache_ancestor = cache_ancestor.parent
+    try:
+        if shutil.disk_usage(cache_ancestor).free < 3 * 1024**3:
+            problems.append('Free at least 3 GiB on the pip-cache drive, or set PIP_CACHE_DIR to a folder on a roomier drive. See docs/INSTALL.md.')
+    except OSError as error:
+        problems.append(f'Cannot inspect the selected pip-cache drive: {error}')
     gpu = nvidia_gpu()
     print('NVIDIA GPU/driver:', gpu or 'not detected')
     if not gpu:
         problems.append('Candidate 5 live processing requires an NVIDIA GPU and driver. Install/update the driver manually from nvidia.com; CPU-only live mode is not exposed in this build.')
-    if not cpp_tools():
+    elif not supported_driver(gpu):
+        problems.append('Use NVIDIA Windows driver 570.65 or newer for the pinned CUDA 12.8/cuDNN 9.10.2 runtime. The detected version is older or could not be read; update/check nvidia-smi before installing packages. See docs/INSTALL.md.')
+    reusable = existing_insightface()
+    if reusable:
+        print('Reusing installed InsightFace 0.7.3 extension; C++ Build Tools are not needed for this rerun.')
+    elif not cpp_tools():
         problems.append('InsightFace 0.7.3 is built from the official PyPI source. Install Visual Studio 2022 Build Tools: Desktop development with C++, MSVC v143 and Windows SDK. See docs/INSTALL.md.')
     print('OBS Virtual Camera driver:', 'registered' if obs_registered() else 'missing; install OBS Studio manually for virtual output (docs/INSTALL.md)')
     if sys.platform == 'win32':

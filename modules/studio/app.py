@@ -63,6 +63,8 @@ SETTINGS = (
     / "FaceArtStudio"
     / "settings.json"
 )
+SUPPORT_URL = "https://paypal.me/WikmanKarl"
+SUPPORT_MESSAGE = "Enjoying FaceArt Studio? Consider a small donation toward development costs."
 STYLE = """
 * { font-family: "Segoe UI"; font-size: 13px; color: #e7eeed; }
 QMainWindow, QWidget#root { background: #101619; }
@@ -275,6 +277,7 @@ class Studio(QMainWindow):
         self.live_audio_stopping = False
         self.live_restorer = None
         self.live_load_busy = False
+        self.support_prompt_suppressed = False
         try:
             self.settings = json.loads(SETTINGS.read_text(encoding="utf-8"))
         except (OSError, ValueError):
@@ -665,7 +668,7 @@ class Studio(QMainWindow):
         a.addWidget(self.cancel_button)
         a.addWidget(
             label(
-                "Models download on first use. Video exports retain source audio.",
+                "Install models separately: see docs/MODELS.md. Video exports retain source audio.",
                 "muted",
             )
         )
@@ -701,6 +704,19 @@ class Studio(QMainWindow):
         # Keep controls intact at the narrow end, including scrollbar space.
         left_scroll.setMinimumWidth(max(278, left.minimumSizeHint().width() + 8))
         right_scroll.setMinimumWidth(max(298, right.minimumSizeHint().width() + 8))
+        self.support_prompt = QFrame()
+        self.support_prompt.setObjectName("panel")
+        support = QHBoxLayout(self.support_prompt)
+        support.setContentsMargins(12, 8, 12, 8)
+        self.support_message = label(SUPPORT_MESSAGE, "muted")
+        self.support_message.setWordWrap(True)
+        support.addWidget(self.support_message, 1)
+        self.support_button = button("Support development", self._open_support)
+        support.addWidget(self.support_button)
+        self.support_dismiss = button("Dismiss", self._dismiss_support)
+        support.addWidget(self.support_dismiss)
+        layout.addWidget(self.support_prompt)
+        self._update_support_prompt()
         footer = QHBoxLayout()
         footer.addWidget(label("●  LOCAL PROCESSING", "eyebrow"))
         footer.addWidget(
@@ -711,6 +727,34 @@ class Studio(QMainWindow):
         footer.addWidget(self.footer)
         layout.addLayout(footer)
         self._library_refresh()
+
+    def _support_idle(self):
+        return not any((self.session, self.recorder, self.live_audio,
+                        self.job_busy, self.record_saving, self.projection))
+
+    def _update_support_prompt(self):
+        idle = self._support_idle()
+        if not idle:
+            # Once work starts, do not redisplay this card during the session.
+            self.support_prompt_suppressed = True
+        self.support_prompt.setVisible(
+            idle and not self.support_prompt_suppressed
+            and not self.settings.get("support_prompt_dismissed", False)
+        )
+
+    def _dismiss_support(self):
+        self.settings["support_prompt_dismissed"] = True
+        self.support_prompt.hide()
+        self._save()
+
+    def _open_support(self):
+        # The exact external link opens only on a deliberate, idle-time click.
+        if not self._support_idle() or self.support_prompt_suppressed or self.support_prompt.isHidden():
+            return
+        if QDesktopServices.openUrl(QUrl(SUPPORT_URL)):
+            self._dismiss_support()
+        else:
+            self.support_message.setText("Could not open the support page. The link is also in README.md.")
 
     def _save(self):
         self.settings.update(
@@ -1070,6 +1114,7 @@ class Studio(QMainWindow):
             self.session.processor.set_background(self.background_config)
             self.session.processor.slideshow=self.slideshow
             self.slideshow.set_size(width,height)
+            self._update_support_prompt()
             self.session.start()
             self.configure_live_gpen()
         except Exception as exc:
@@ -1486,6 +1531,7 @@ class Studio(QMainWindow):
         dialog.deleteLater()
 
     def _tick(self):
+        self._update_support_prompt()
         if self.background_config.mode=='slideshow':
             self.slideshow.tick()
             if getattr(self,'_last_slide_active',None)!=self.slideshow.active:

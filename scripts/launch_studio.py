@@ -11,7 +11,7 @@ from scripts.check_install import model_problems
 
 
 def main():
-    problems = model_problems()
+    problems = model_problems(required_only=True)
     if problems:
         print('\n'.join(problems))
         print('Finish the manual model steps in docs/MODELS.md, then start again.')

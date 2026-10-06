@@ -31,3 +31,7 @@ Virtual output starts off every time. The output pipeline uses validated process
 [Installation and troubleshooting](docs/INSTALL.md), [models](docs/MODELS.md), [tester checklist](docs/TESTING.md) and [release provenance](docs/RELEASE.md) describe exactly what was checked and what remains unverified. Output delivery can repeat processed frames; **output cadence is not fresh inference FPS**. Browser/Discord receipt, long sessions and combined Voicemod load need tester acceptance.
 
 Logs, settings, generated files and caches stay under `state/` and are ignored by Git. Logs may contain local file paths or device names; review them before sharing. The source retains the upstream [AGPL-3.0 license](LICENSE); [third-party notices](THIRD_PARTY_NOTICES.md) cover the bundled segmentation asset and separately acquired models/dependencies.
+
+## Support development
+
+Enjoying FaceArt Studio? Consider a small [donation toward development costs](https://paypal.me/WikmanKarl). Donations are optional and do not unlock features. The app shows a small dismissible support card while idle; dismissal is remembered locally, and the link opens only when clicked.

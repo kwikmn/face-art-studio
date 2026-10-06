@@ -11,10 +11,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 
-def model_problems(hash_models=False):
+def model_problems(hash_models=False, required_only=False):
     manifest = json.loads((ROOT / 'models/downloads.json').read_text(encoding='utf-8'))
     problems = []
     for item in manifest['models']:
+        if required_only and not item.get('required'):
+            continue
         path = ROOT / item['path']
         if not path.is_file():
             if item.get('required'):
